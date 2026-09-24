@@ -6,13 +6,14 @@ import ChocolateWave from './components/ChocolateWave.jsx'
 import './styles/app.css'
 
 export default function App() {
-  // One screen, no scrolling: header, hero and the three games all fit.
+  // One screen, no scrolling. The logo sits inside the centred column with
+  // the rest of the content, so there is no gap between it and the headline.
   return (
     <div className="stage">
       <FloatingChunks />
-      <Header />
 
       <main className="stage-main">
+        <Header />
         <Hero />
         <GameShelf />
       </main>

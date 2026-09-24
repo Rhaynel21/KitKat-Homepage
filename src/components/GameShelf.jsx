@@ -6,6 +6,8 @@ export default function GameShelf() {
   return (
     <section className="shelf" id="games">
       <div className="shell">
+        <p className="shelf-prompt">Tap a game to play</p>
+
         <ul className="shelf-grid">
           {games.map((g) => {
             const ready = g.url && g.url !== '#'
@@ -17,18 +19,23 @@ export default function GameShelf() {
                   target={g.external ? '_blank' : undefined}
                   rel={g.external ? 'noreferrer' : undefined}
                   aria-disabled={ready ? undefined : 'true'}
-                  aria-label={`Play ${g.game} — ${g.name}`}
+                  aria-label={ready ? `Play ${g.game}` : `${g.game} — coming soon`}
                   onClick={ready ? undefined : (e) => e.preventDefault()}
                 >
                   <span className="pack-stage">
-                    <PackShot className="pack-art" variant={g.wrapper} isNew={g.isNew} />
+                    {g.cover ? (
+                      <img
+                        className="pack-art pack-cover"
+                        src={g.cover}
+                        width="460"
+                        height="818"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <PackShot className="pack-art" variant={g.wrapper} isNew={g.isNew} />
+                    )}
                   </span>
-
-                  <span className="pack-name">{g.name}</span>
-                  <span className="pack-game">{g.game}</span>
-                  <span className="pack-tagline">{g.tagline}</span>
-
-                  <span className="pack-cta">{ready ? 'Play Now' : 'Coming Soon'}</span>
                 </a>
               </li>
             )

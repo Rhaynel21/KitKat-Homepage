@@ -1,7 +1,7 @@
 .hero {
   /* One knob drives the bar: its height. How far it rides up into the
      headline, and the gap under it, both follow from that. */
-  --bar-h: clamp(4rem, 15vh, 300px);
+  --bar-h: clamp(4rem, 22vh, 460px);
 
   position: relative;
   z-index: 1;
@@ -35,6 +35,9 @@
   position: relative;
   height: var(--bar-h);
   aspect-ratio: 1139 / 570;
+  /* The bar is sized by height, so on a very narrow screen it would be
+     wider than the viewport. This caps it and the height follows. */
+  max-width: 100%;
   margin-top: calc(var(--bar-h) * -0.26);
   filter: drop-shadow(0 20px 26px rgba(88, 12, 8, 0.4));
 }

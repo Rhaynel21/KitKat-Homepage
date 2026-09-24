@@ -1,37 +1,44 @@
-// The three boxes in the "4 FINGERS" row. Each one opens a game.
+import coverSpinAndWin from '../assets/cover-spin-and-win.webp'
+import coverConeOrStick from '../assets/cover-cone-or-stick.webp'
+import coverFindTheIceCream from '../assets/cover-find-the-ice-cream.webp'
+
+// The three boxes on the landing page. Tapping a box opens its game.
+// `game` is not drawn on the page — the cover art carries the name — but
+// it is what a screen reader announces for the link.
 //
-// >>> Drop the game links here. That is the only edit needed. <<<
-// `url` accepts anything an <a href> accepts: a full URL
-// ("https://..."), or a path inside this site ("/games/snap").
-// `external: true` opens the link in a new tab.
+// `cover` is a shot of the game itself. All three are the same shape
+// (460x818), which is what keeps the row even — crop a replacement to
+// that aspect ratio.
+//
+// `wrapper` ('milk' | 'dark' | 'cookies') draws a Kit Kat pack instead,
+// as a stand-in for a game that has no cover yet. A `cover` wins when
+// both are set.
+//
+// `url` takes anything an <a href> takes. `external: true` opens the game
+// in a new tab; false keeps it in the same tab, which is what you want on
+// a kiosk. A box still set to '#' renders as "Coming Soon" and does not
+// respond to a tap.
 
 export const games = [
   {
-    id: 'milk',
-    name: 'Kit Kat Milk 45g',
-    game: 'Snap Rush',
-    tagline: 'Break the bar before the clock does.',
+    id: 'spin-and-win',
+    game: 'Spin and Win',
     url: 'https://games.360logix.com/GAM195436436455',
     external: false,
-    wrapper: 'milk',
+    cover: coverSpinAndWin,
   },
   {
-    id: 'dark',
-    name: 'Kit Kat Dark 70% 45g',
-    game: 'Cocoa Drop',
-    tagline: 'Catch every falling finger. Miss three, you are out.',
+    id: 'cone-or-stick',
+    game: 'Cone or Stick',
     url: 'https://games.360logix.com/GAM537738851395',
     external: false,
-    wrapper: 'dark',
+    cover: coverConeOrStick,
   },
   {
-    id: 'cookies',
-    name: 'Kit Kat Double Cookies & Cream 45g',
-    game: 'Wafer Stack',
-    tagline: 'Stack the layers. Do not let the tower snap.',
+    id: 'find-the-ice-cream',
+    game: 'Find The Ice Cream',
     url: 'https://games.360logix.com/GAM261982904527',
     external: false,
-    wrapper: 'cookies',
-    isNew: true,
+    cover: coverFindTheIceCream,
   },
 ]

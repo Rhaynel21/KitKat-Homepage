@@ -18,3 +18,12 @@
 .wave-front {
   fill: var(--choc-deepest);
 }
+
+/* A portrait display has height to spare, so the ridge grows to anchor the
+   bottom instead of leaving a band of empty red under the games. Landscape
+   screens have no slack, so there it stays shallow. */
+@media (max-aspect-ratio: 2 / 3) {
+  .wave svg {
+    height: clamp(2.9rem, min(20vw, 10.5vh), 240px);
+  }
+}

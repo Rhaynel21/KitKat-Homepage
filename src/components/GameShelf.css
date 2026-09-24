@@ -4,12 +4,32 @@
   text-align: center;
 }
 
+.shelf-prompt {
+  margin: 0 0 clamp(0.6rem, 1.8vh, 1.4rem);
+  font-family: var(--font-display);
+  font-size: clamp(0.8rem, min(2.2vw, 2.2vh), 1.6rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--kk-gold);
+  animation: prompt-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes prompt-pulse {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 .shelf-grid {
   display: grid;
   /* minmax(0,...) lets the columns shrink below their content width.
      With a plain 1fr the grid overflows and widens the whole page. */
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.8rem, 2vw, 2.4rem);
+  gap: clamp(0.5rem, 1.4vw, 1.6rem);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -22,7 +42,7 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
-  padding: clamp(0.9rem, 2vh, 1.6rem) 1rem clamp(1rem, 2.2vh, 1.7rem);
+  padding: clamp(0.5rem, 1.4vh, 0.9rem) clamp(0.4rem, 0.9vw, 0.7rem) clamp(0.7rem, 1.8vh, 1.2rem);
   border-radius: 10px;
   background: rgba(0, 0, 0, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -38,16 +58,31 @@
 }
 
 .pack-stage {
-  display: grid;
-  place-items: center;
-  height: clamp(3.6rem, 15vh, 280px);
+  position: relative;
+  width: 100%;
+  /* Width-driven so the cover fills the card edge to edge, with a vh cap
+     so it still shrinks on short screens. */
+  aspect-ratio: 460 / 818;
+  max-height: 29vh;
 }
 
+/* Pinned to the stage box and letterboxed inside it. Sizing the art with
+   height:100% instead lets it escape the stage and break the page fit. */
 .pack-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
   height: 100%;
-  width: auto;
+  object-fit: contain;
   filter: drop-shadow(0 16px 20px rgba(80, 10, 8, 0.45));
   transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* A real game screen, rather than a drawn wrapper */
+.pack-cover {
+  border-radius: 7px;
+  box-shadow: 0 14px 26px rgba(70, 8, 6, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.18);
+  filter: none;
 }
 
 .pack-link:hover .pack-art,
@@ -55,11 +90,10 @@
   transform: rotate(-4deg) scale(1.06);
 }
 
-.pack-name {
-  margin-top: clamp(0.6rem, 1.4vh, 1.1rem);
-  font-size: clamp(0.68rem, 1.3vh, 0.95rem);
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.92);
+/* The cover reads as a screen, so it lifts straight rather than tilting */
+.pack-link:hover .pack-cover,
+.pack-link:focus-visible .pack-cover {
+  transform: scale(1.05);
 }
 
 .pack-game {
@@ -79,35 +113,9 @@
   color: rgba(255, 255, 255, 0.72);
 }
 
-/* ---- Button ---- */
-.pack-cta {
-  margin-top: auto;
-  padding: clamp(0.45rem, 1.1vh, 0.7rem) clamp(1rem, 2.4vw, 1.7rem);
-  margin-block-start: clamp(0.75rem, 1.8vh, 1.3rem);
-  font-size: clamp(0.58rem, 1.1vh, 0.82rem);
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink);
-  background: var(--kk-gold);
-  border-radius: 2px;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.pack-link:hover .pack-cta,
-.pack-link:focus-visible .pack-cta {
-  background: var(--kk-cream);
-  transform: scale(1.04);
-}
-
 /* A box with no link yet still looks right, but does not pretend to work. */
 .pack-link[aria-disabled='true'] {
   cursor: not-allowed;
-}
-
-.pack-link[aria-disabled='true'] .pack-cta {
-  background: rgba(255, 255, 255, 0.22);
-  color: rgba(255, 255, 255, 0.85);
 }
 
 /* Narrow screens keep all three across rather than stacking, so the games
@@ -130,22 +138,10 @@
     display: none;
   }
 
-  .pack-name {
-    margin-top: 0.5rem;
-    font-size: 0.58rem;
-    line-height: 1.25;
-  }
-
   .pack-game {
     font-size: 0.86rem;
   }
 
-  .pack-cta {
-    margin-block-start: 0.7rem;
-    padding: 0.42rem 0.5rem;
-    font-size: 0.5rem;
-    letter-spacing: 0.1em;
-  }
 }
 
 /* Short screens: drop the descriptions so the page still fits one screen. */
