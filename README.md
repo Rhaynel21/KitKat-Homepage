@@ -48,7 +48,21 @@ the root font-size shrinks too, so every `rem` based size follows it down.
 Verified with no scrolling and no sideways overflow at 30 viewport sizes from
 280 × 653 through 1080 × 1900 to 2560 × 1440.
 
-Four things are easy to break by accident if you edit the CSS:
+## How big the games are
+
+`--cover-h` on `.shelf` is the single knob for the size of the three games.
+Everything else in the row follows from it:
+
+- `.pack-link` is `calc(var(--cover-h) * 0.563 + 1.4rem)` wide — exactly the
+  cover plus its padding, where `0.563` is the 460 × 818 cover aspect. Without
+  this the card stretches to a third of the row and each game sits in a box of
+  empty red on a wide screen.
+- `.shelf-grid` is capped to the width three of those cards actually need, so
+  the row stays together in the middle rather than drifting to the edges.
+
+Change the cover size by changing `--cover-h` and nothing else.
+
+Six things are easy to break by accident if you edit the CSS:
 
 - **The headline must never wrap.** Two lines blow the layout apart. It is sized
   from the width actually available (`available width ÷ 5.9`, the measured
@@ -63,10 +77,25 @@ Four things are easy to break by accident if you edit the CSS:
 - **The cover art is pinned inside its stage** with `position: absolute` and
   `object-fit: contain`. Sizing it with `height: 100%` instead lets it escape
   the box and break the one-screen fit.
+- **`max-width: 100%` on `.snap`.** The hero bar is sized by height, so its
+  aspect-derived width can exceed a narrow viewport without this.
+- **The headline sits above the bar** (`z-index: 2`). The bar overlaps it by
+  20%, and reaching for a smaller overlap instead costs enough height to break
+  the fit on short landscape screens.
 
-On a portrait display there is height to spare, so the chocolate ridge grows and
-the centred column is nudged upward — both scoped to `max-aspect-ratio: 2/3`.
-Landscape screens have no slack and keep the shallow ridge and even padding.
+## Portrait and landscape
+
+The two orientations want opposite things, so a few rules are scoped by aspect
+ratio rather than by width:
+
+- **`max-aspect-ratio: 2/3`** (portrait, including the 1080 × 1900 target):
+  there is height to spare, so the chocolate ridge grows and the centred column
+  is nudged upward, which keeps the space above the logo from opening up.
+- **`min-aspect-ratio: 1/1`** (landscape): there is width to spare but little
+  height, so the logo, headline and bar all shrink and `--cover-h` grows, giving
+  the games most of the screen.
+
+Anything in between keeps the base values.
 
 ## How it is put together
 
