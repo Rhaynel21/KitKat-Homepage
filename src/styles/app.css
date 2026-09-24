@@ -1,0 +1,34 @@
+/* The whole landing page is one screen: nothing scrolls, and the three
+   games are visible the moment it loads. */
+#root {
+  display: flex;
+  min-height: 100dvh;
+}
+
+.stage {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* A soft glow behind the hero keeps the flat red from looking dead */
+  background: radial-gradient(120% 70% at 50% 18%, #f2333a 0%, var(--kk-red) 48%, #cf1a22 100%);
+}
+
+.stage-main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: clamp(0.45rem, 2vh, 2.5rem);
+  padding-block: clamp(0.5rem, 1.8vh, 2.5rem);
+}
+
+.stage-foot {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  background: var(--choc-deepest);
+}
+

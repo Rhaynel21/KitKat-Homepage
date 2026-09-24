@@ -1,0 +1,113 @@
+:root {
+  /* Brand */
+  --kk-red: #e9202a;
+  --kk-red-deep: #c8141d;
+  --kk-cream: #f7d9a0;
+  --kk-gold: #f3c86f;
+  --kk-white: #ffffff;
+
+  /* Chocolate */
+  --choc-light: #a6673c;
+  --choc: #8b4f2c;
+  --choc-mid: #6f3d21;
+  --choc-dark: #4e2815;
+  --choc-deepest: #3a1d0f;
+
+  /* Wafer */
+  --wafer: #e8cba0;
+  --wafer-shade: #cfa970;
+
+  --ink: #2a1206;
+
+  --shell: min(1180px, 100% - 3rem);
+  --radius: 4px;
+
+  --font-display: 'Anton', 'Arial Narrow', Impact, sans-serif;
+  --font-body: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Stays 16px on any screen taller than ~615px, then shrinks. Every rem
+     based size on the page rides on this, so the whole layout keeps
+     compressing instead of overflowing on short viewports. */
+  font-size: min(16px, 2.6vh);
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--kk-red);
+  color: var(--kk-white);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 3px solid var(--kk-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.shell {
+  width: var(--shell);
+  margin-inline: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

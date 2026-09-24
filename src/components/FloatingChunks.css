@@ -1,0 +1,48 @@
+.chunks {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.chunk {
+  position: absolute;
+  aspect-ratio: 5 / 2;
+  border-radius: 5px;
+  background:
+    /* top bevel */
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0 14%, transparent 14%),
+    /* shadow under the bar */ linear-gradient(0deg, rgba(0, 0, 0, 0.35) 0 18%, transparent 18%),
+    /* the finger grooves */
+      repeating-linear-gradient(
+        90deg,
+        var(--choc) 0 22%,
+        var(--choc-dark) 22% 25%
+      );
+  box-shadow:
+    0 18px 30px rgba(90, 15, 10, 0.35),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+  transform: rotate(var(--rot));
+  animation: chunk-drift var(--dur) ease-in-out var(--delay) infinite alternate;
+  opacity: 0.95;
+}
+
+@keyframes chunk-drift {
+  from {
+    transform: rotate(var(--rot)) translate3d(0, 0, 0);
+  }
+  to {
+    transform: rotate(calc(var(--rot) + 10deg)) translate3d(10px, -26px, 0);
+  }
+}
+
+@media (max-width: 720px) {
+  /* Keep only the pieces that sit clear of the text on small screens */
+  .chunk:nth-child(n + 6) {
+    display: none;
+  }
+  .chunk {
+    opacity: 0.65;
+  }
+}

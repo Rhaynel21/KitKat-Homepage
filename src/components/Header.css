@@ -1,0 +1,36 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  padding-block: clamp(0.45rem, 1.6vh, 1.8rem);
+  transition: background-color 0.25s ease, padding 0.25s ease, box-shadow 0.25s ease;
+}
+
+.site-header.is-stuck {
+  padding-block: 0.7rem;
+  background: var(--kk-red-deep);
+  box-shadow: 0 10px 30px rgba(70, 8, 6, 0.3);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  display: block;
+  line-height: 0;
+}
+
+/* The artwork is transparent around the oval, so it sits straight on the red. */
+.logo-img {
+  height: clamp(2.4rem, min(7.6vw, 8.5vh), 108px);
+  width: auto;
+  filter: drop-shadow(0 8px 18px rgba(80, 10, 8, 0.32));
+  transition: transform 0.22s ease;
+}
+
+.logo:hover .logo-img {
+  transform: translateY(-2px) scale(1.02);
+}
