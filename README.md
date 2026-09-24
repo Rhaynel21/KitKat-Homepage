@@ -108,6 +108,7 @@ Anything in between keeps the base values.
 | `src/components/PackShot.jsx` | Fallback pack artwork, drawn as SVG |
 | `src/components/FloatingChunks.jsx` | Chocolate pieces tumbling around the hero |
 | `src/components/ChocolateWave.jsx` | The melted-chocolate ridge at the bottom |
+| `src/components/FullscreenButton.jsx` | Corner toggle for full screen |
 | `src/styles/global.css` | Colours, fonts and other design tokens |
 
 The snap is two clipped copies of the same photo. They start pivoted together so

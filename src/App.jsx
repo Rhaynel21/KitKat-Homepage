@@ -3,6 +3,7 @@ import FloatingChunks from './components/FloatingChunks.jsx'
 import Hero from './components/Hero.jsx'
 import GameShelf from './components/GameShelf.jsx'
 import ChocolateWave from './components/ChocolateWave.jsx'
+import FullscreenButton from './components/FullscreenButton.jsx'
 import './styles/app.css'
 
 export default function App() {
@@ -11,6 +12,7 @@ export default function App() {
   return (
     <div className="stage">
       <FloatingChunks />
+      <FullscreenButton />
 
       <main className="stage-main">
         <Header />
