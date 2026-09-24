@@ -131,3 +131,17 @@
     transform: none;
   }
 }
+
+@media (min-aspect-ratio: 1 / 1) {
+  .hero {
+    --bar-h: clamp(4rem, 13vh, 300px);
+  }
+
+  .hero-title {
+    font-size: min(calc((100vw - 3rem) / 5.9), calc(1180px / 5.9), 10vh);
+  }
+
+  .hero-sub {
+    font-size: clamp(1.1rem, min(6.5vw, 4.4vh), 4.5rem);
+  }
+}

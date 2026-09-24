@@ -12,3 +12,9 @@
   width: auto;
   filter: drop-shadow(0 8px 18px rgba(80, 10, 8, 0.32));
 }
+
+@media (min-aspect-ratio: 1 / 1) {
+  .logo-img {
+    height: clamp(2.2rem, min(12vw, 7.5vh), 170px);
+  }
+}

@@ -1,4 +1,10 @@
 .shelf {
+  /* One knob for how big the games are. The card hugs the cover rather
+     than stretching to a third of the row, so no empty space sits beside
+     the artwork on a wide screen. */
+  --cover-h: clamp(3.6rem, 29vh, 560px);
+  --shelf-gap: clamp(0.5rem, 1.4vw, 1.6rem);
+
   position: relative;
   z-index: 1;
   text-align: center;
@@ -29,20 +35,27 @@
   /* minmax(0,...) lets the columns shrink below their content width.
      With a plain 1fr the grid overflows and widens the whole page. */
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.5rem, 1.4vw, 1.6rem);
-  margin: 0;
+  gap: var(--shelf-gap);
+  /* Only as wide as the three covers need, so they sit together in the
+     middle instead of drifting to the edges of a wide screen. */
+  max-width: calc(3 * (var(--cover-h) * 0.563 + 1.4rem) + 2 * var(--shelf-gap));
+  margin: 0 auto;
   padding: 0;
   list-style: none;
 }
 
 /* ---- One box ---- */
 .pack-link {
+  /* Exactly as wide as the cover it holds (0.563 is the cover aspect),
+     and never wider than its column. */
+  width: min(100%, calc(var(--cover-h) * 0.563 + 1.4rem));
+  margin-inline: auto;
   min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100%;
-  padding: clamp(0.5rem, 1.4vh, 0.9rem) clamp(0.4rem, 0.9vw, 0.7rem) clamp(0.7rem, 1.8vh, 1.2rem);
+  padding: 0.7rem;
   border-radius: 10px;
   background: rgba(0, 0, 0, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -60,10 +73,8 @@
 .pack-stage {
   position: relative;
   width: 100%;
-  /* Width-driven so the cover fills the card edge to edge, with a vh cap
-     so it still shrinks on short screens. */
   aspect-ratio: 460 / 818;
-  max-height: 29vh;
+  max-height: var(--cover-h);
 }
 
 /* Pinned to the stage box and letterboxed inside it. Sizing the art with
@@ -148,5 +159,13 @@
 @media (max-height: 940px) {
   .pack-tagline {
     display: none;
+  }
+}
+
+/* Landscape has width to spare but little height. Shrink the hero so the
+   games — the point of the page — get most of the screen. */
+@media (min-aspect-ratio: 1 / 1) {
+  .shelf {
+    --cover-h: clamp(3.6rem, 42vh, 560px);
   }
 }
